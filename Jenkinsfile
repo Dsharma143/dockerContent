@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/dsharma143/projCert.git'
+                git branch: 'master', url: 'https://github.com/Dsharma143/dockerContent.git'
             }
         }
 
@@ -32,8 +32,8 @@ pipeline {
                     withCredentials([file(credentialsId: 'minikube-kubeconfig-file', variable: 'KUBECONFIG')]) {
                     bat '''
                         kubectl --kubeconfig=%KUBECONFIG% config set-context minikube
-                        kubectl --kubeconfig=%KUBECONFIG% apply -f k8/deployment.yaml --validate=false
-                        kubectl --kubeconfig=%KUBECONFIG% apply -f k8/service.yaml --validate=false
+                        kubectl --kubeconfig=%KUBECONFIG% apply -f deployment.yaml --validate=false
+                        kubectl --kubeconfig=%KUBECONFIG% apply -f service.yaml --validate=false
                     '''
                     }
                 }
